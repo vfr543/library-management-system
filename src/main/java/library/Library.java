@@ -10,7 +10,49 @@ public class Library {
     public Library() {
         this.books = new ArrayList<>();
     }
+    // Вложенный статический класс для журнала операций
+    public static class OperationLog {
+        public enum OperationType {
+            ADD_BOOK, BORROW, RETURN
+        }
 
+        public static class LogEntry {
+            private OperationType type;
+            private LocalDateTime time;
+            private String message;
+
+            public LogEntry(OperationType type, String message) {
+                this.type = type;
+                this.time = LocalDateTime.now();
+                this.message = message;
+            }
+
+            @Override
+            public String toString() {
+                return String.format("[%s] %s: %s", time, type, message);
+            }
+        }
+
+        private List<LogEntry> entries;
+
+        public OperationLog() {
+            entries = new ArrayList<>();
+        }
+
+        public void addEntry(OperationType type, String message) {
+            entries.add(new LogEntry(type, message));
+        }
+
+        public void printLog() {
+            System.out.println("=== Журнал операций ===");
+            for (LogEntry entry : entries) {
+                System.out.println(entry);
+            }
+            System.out.println("=======================");
+        }
+    }
+
+    private OperationLog log = new OperationLog();
 
     public void addBook(Book book) {
         books.add(book);
