@@ -133,7 +133,11 @@ public class Library {
         }
         return false;
     }
-
-
-
+    public boolean updateBook(int id, Book newData) {
+        Book book = findBookById(id);
+        if (book != null) {
+            return true;
+        }
+        return false;
+    }
 }
