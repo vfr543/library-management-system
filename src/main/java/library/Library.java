@@ -125,6 +125,15 @@ public class Library {
                         "Выдано: %d",
                 total, available, borrowed);
     }
+    public boolean removeBook(int id) {
+        Book book = findBookById(id);
+        if (book != null) {
+            books.remove(book);
+            return true;
+        }
+        return false;
+    }
+
 
 
 }
